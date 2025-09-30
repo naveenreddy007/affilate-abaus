@@ -25,7 +25,7 @@ class User(SQLModel, table=True):
     
     # Referral system
     referrer_id: Optional[int] = Field(default=None, foreign_key="user.id")
-    referrer: Optional["User"] = Relationship(back_populates="referrals")
+    referrer: Optional["User"] = Relationship(back_populates="referrals", sa_relationship_kwargs={"remote_side": "User.id"})
     referrals: List["User"] = Relationship(back_populates="referrer")
     
     # Package information
